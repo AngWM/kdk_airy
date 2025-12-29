@@ -223,11 +223,6 @@ class KdkDeviceSettings:
 class KdkApiClient:
     "KDK API client."
 
-    SUPPORTED_PRODUCT_CODES = [
-        "E48HP",
-        "E48GP",
-    ]
-
     # Hard-coded values from the KDK Ceiling Fan app v1.1.0
     APP_KEY = "rZLwuRtU0nFb20Mh6LShL6uY3fZ5tBlarz4ONmdl"
     USER_AGENT = "CeilingFanKDK_prod_appStore/1.1.0 (iPhone; iOS 16.4.1; Scale/3.00)"
@@ -476,16 +471,11 @@ class KdkApiClient:
             return await response.json()
 
     async def get_registered_fans(self):
-        """Return a list of registered fans (includes offline) to the account,`
-        filtered by supported product codes."""
+        "Return a list of registered fans (includes offline) to the account."
         data = await self._make_request(
             "GET", "https://prod.mycfan.pgtls.net/v1/mycfan/user/devices"
         )
-        return [
-            KdkDevice(**device)
-            for device in data["devices"]
-            if device.get("product_code") in KdkApiClient.SUPPORTED_PRODUCT_CODES
-        ]
+        return [KdkDevice(**device) for device in data["devices"]]
 
     async def get_statuses(
         self, devices: list[KdkDevice]
