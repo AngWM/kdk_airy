@@ -224,8 +224,8 @@ class KdkApiClient:
     "KDK API client."
 
     SUPPORTED_PRODUCT_CODES = [
-        "F-M12EC",
-        "F-M12GC",
+        "E48HP",
+        "E48GP",
     ]
 
     # Hard-coded values from the KDK Ceiling Fan app v1.1.0
