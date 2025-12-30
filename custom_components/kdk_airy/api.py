@@ -82,7 +82,7 @@ class KdkDevice(NamedTuple):
     @property
     def has_lights(self):
         "Whether the fan device also has lights."
-        return self.product_code in ["E48GP"]
+        return self.product_code in ["F-M12GC"]
 
 
 @dataclass
@@ -489,8 +489,8 @@ class KdkApiClient:
 
         for device in devices:
             get_status_packet = {
-                "E48HP": "0A00800000F00000860000880000F80000F20000F10000F90000FA0000FB00",
-                "E48GP": "0F00800000F00000860000880000F80000F20000F10000F90000FA0000FB0000F30000F50000F40000F70000F600",
+                "F-M12EC": "0A00800000F00000860000880000F80000F20000F10000F90000FA0000FB00",
+                "F-M12GC": "0F00800000F00000860000880000F80000F20000F10000F90000FA0000FB0000F30000F50000F40000F70000F600",
             }[device.product_code]
 
             command_request_id = await self.send_command(
